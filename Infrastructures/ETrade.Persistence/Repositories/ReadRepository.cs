@@ -25,8 +25,9 @@ public class ReadRepository<TEntity> : IReadRepository<TEntity> where TEntity : 
         => Table;
 
     public async Task<TEntity> GetByIdAsync(string id)
-       => await Table.FirstOrDefaultAsync(data => data.Id == Guid.Parse(id));
-    
+       => await Table.FindAsync(Guid.Parse(id));
+    //=> await Table.FirstOrDefaultAsync(data => data.Id == Guid.Parse(id));
+
 
     public async Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> filter)
         => await Table.FirstOrDefaultAsync(filter);
